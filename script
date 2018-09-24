@@ -1,0 +1,40 @@
+#! /bin/sh
+#Constants
+SCRIPTNAME="TDS18 Manager"
+
+#Before Script
+
+#Functions
+
+#Script
+case "$1" in
+  compile)
+	echo "Compiling"
+	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
+	bison -d -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y
+	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	;;
+  run)
+	./bin/main $2
+	;;
+  test)
+	echo "Testing - TODO"
+	;;
+  quickrun)
+	echo "Compiling"
+	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
+	bison -d -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y
+	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	echo "Running"
+	./bin/main $2
+	;;
+  clean)
+	rm bin/*
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {compile|run|test|quickrun|}" >&2
+	exit 3
+	;;
+esac
+
+exit 0
