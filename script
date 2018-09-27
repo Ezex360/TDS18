@@ -14,11 +14,22 @@ case "$1" in
 	bison -d -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y
 	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
 	;;
+  compile_flags)
+	echo "Compiling"
+	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
+	bison -v -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y 
+	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	;;
   run)
 	./bin/main $2
 	;;
   test)
-	echo "Testing - TODO"
+	echo "Testing"
+	for filename in ./test/*.txt; do
+		echo "------  Test  $filename ------"
+		./bin/main $filename
+		echo "------ END TEST ------\n"
+	done
 	;;
   quickrun)
 	echo "Compiling"
@@ -32,7 +43,7 @@ case "$1" in
 	rm bin/*
 	;;
   *)
-	echo "Usage: $SCRIPTNAME {compile|run|test|quickrun|}" >&2
+	echo "Usage: $SCRIPTNAME {compile|run|test|quickrun|clean}" >&2
 	exit 3
 	;;
 esac

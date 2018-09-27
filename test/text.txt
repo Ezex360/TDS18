@@ -1,0 +1,22 @@
+program
+begin
+	integer x,y;
+	void uno()
+	begin
+		if (uno == dos) then begin
+			if (uno == dos) then begin
+				return 1 > 2;
+			end else begin
+				return 2 < 5;
+			end
+		end else begin
+			return 3 ==3; 
+		end
+	end
+	integer main() 
+	begin
+		x = 1;
+		x = 2;
+		return x;
+	end
+end

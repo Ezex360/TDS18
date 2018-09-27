@@ -26,34 +26,112 @@ rel_op [<>]
 
 
 %%
-"var"                     	  { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+
+"program"                     { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
                                 strcpy(yylval.s,yytext);
-                                printf("VAR : %s\n",yytext);
-								                return VAR;}
+                                //printf("program : %s\n",yytext);
+                                return PROGRAM;}
+
+"begin"                       { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("begin : %s\n",yytext);
+                                return BEGINN;}
+
+"end"                         { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("end : %s\n",yytext);
+                                return END;}
+
+"void"                        { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("void : %s\n",yytext);
+                                return VOID;}
+
+"extern"                      { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("extern : %s\n",yytext);
+                                return EXTERN;}
+
+"bool"                        { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("bool : %s\n",yytext);
+                                return BOOL;}
+
+"if"                          { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("if : %s\n",yytext);
+                                return IF;}
+
+"else"                        { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("else : %s\n",yytext);
+                                return ELSE;}
+
+"then"                         { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("then : %s\n",yytext);
+                                return THEN;}
+
+"integer"                      { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("integer : %s\n",yytext);
+                                return INTEGER;}
+
+"return"                      { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("return : %s\n",yytext);
+                                return RETURN;}
+
+"while"                       { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("while : %s\n",yytext);
+                                return WHILE;}
+
+"var"                         { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("var : %s\n",yytext);
+                                return VAR;}
+
+"true"                         { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("true : %s\n",yytext);
+                                return TRUE;}
+
+"false"                         { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("false : %s\n",yytext);
+                                return FALSE;}
+
 
 {digito}+                     { yylval.i = atoi(yytext);
-                                printf("INT : %d\n",atoi(yytext)); 
+                                //printf("INT : %d\n",atoi(yytext)); 
                                 return INT;}
 
 {letra}({letra}|{digito})*    { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
                                 strcpy(yylval.s,yytext);
-                                printf("ID : %s\n",yytext);
+                                //printf("ID : %s\n",yytext);
                                 return ID;}
 
-{arith_op}                    { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
-                                strcpy(yylval.s,yytext);
-                                printf("ARITMETICAL OP : %s\n",yytext);
-                                return ARITH_OP;}
+{arith_op}|{rel_op}|"="|"!"   { //printf("OPERADOR: %s\n",yytext);
+                                return *yytext;}
 
-{rel_op}|"=="                 { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
-                                strcpy(yylval.s,yytext);
-                                printf("RELATIONAL OP : %s\n",yytext);
-                                return REL_OP;}
+";"|","|"("|")"               { //printf("COMAS: %s\n",yytext);
+                                return *yytext;}
 
-"&&"|"||"                     { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+"&&"                          { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
                                 strcpy(yylval.s,yytext);
-                                printf("CONDITIONAL OP : %s\n",yytext);
-                                return COND_OP;}
+                                //printf("AND: %s\n",yytext);
+                                return AND;}
+
+"||"                          { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("OR: %s\n",yytext);
+                                return OR;}
+
+"=="                           { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+                                strcpy(yylval.s,yytext);
+                                //printf("EQUALS: %s\n",yytext);
+                                return EQUALS;}
 
 .|\n                          ; /* ignore all the rest */
 
