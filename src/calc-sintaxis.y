@@ -29,6 +29,7 @@
 %token<s> OR
 %token<s> EQUALS
 
+
 //%type<s> program
 //%type<s> var_aux
 //%type<s> list_ID

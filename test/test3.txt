@@ -1,0 +1,6 @@
+program
+begin
+	void main() begin
+		x = 3;
+	end
+end

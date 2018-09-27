@@ -128,10 +128,14 @@ rel_op [<>]
                                 //printf("OR: %s\n",yytext);
                                 return OR;}
 
-"=="                           { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
+"=="                          { yylval.s=(char *) malloc(sizeof(yytext)*yyleng);
                                 strcpy(yylval.s,yytext);
                                 //printf("EQUALS: %s\n",yytext);
                                 return EQUALS;}
+
+"//".*\n                      {printf("Comentario: %s\n",yytext);}
+
+"/*"(.|\n)*"*/"               {printf("Comentario: %s\n",yytext);}
 
 .|\n                          ; /* ignore all the rest */
 
