@@ -1,0 +1,12 @@
+//test for comments
+program
+begin
+	void main() begin
+		//int x
+		{ int x }
+		{ int x { int x } int x }
+		int x;
+		{ $ int x }
+	end
+ 
+end

@@ -1,0 +1,16 @@
+//operadores relacionales
+program
+begin
+	void main() begin
+		integer x,y;
+		bool res;
+		x = 1;
+		y = 2;
+		res = x < y;
+		res = x > y;
+		res = x == x;
+		res = x == y;
+		res = !x;
+	end
+ 
+end

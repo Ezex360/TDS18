@@ -1,0 +1,12 @@
+//while test
+program
+begin
+	void main() begin
+		integer x;
+		x = 0;
+		while (x<10) begin
+			x = x + 1;
+		end
+	end
+ 
+end

@@ -1,3 +1,4 @@
+//TEST de la estructura if anidado
 program
 begin
 	integer x,y;
@@ -13,7 +14,7 @@ begin
 			return 3 ==3; 
 		end
 	end
-	integer main() 
+	void main() 
 	begin
 		x = 1;
 		x = 2;

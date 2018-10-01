@@ -1,0 +1,19 @@
+//function test
+program
+begin
+	integer func(integer x) begin
+		return x;
+	end
+
+	integer uno() begin
+		return 1;
+	end
+
+	void main() begin
+		integer x,y;
+		x = uno();
+		y = func(2);
+
+	end
+ 
+end

@@ -1,0 +1,16 @@
+//if test
+program
+begin
+	void main() begin
+		bool x,y;
+		if (1 < 2) then begin
+			x = true;
+		end
+		if (1 > 2) then begin
+			y = true;
+		end else begin
+			y = false;
+		end
+	end
+ 
+end

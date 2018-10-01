@@ -28,6 +28,7 @@
 %token<s> AND
 %token<s> OR
 %token<s> EQUALS
+%token<s> ERR_CHAR
 
 
 //%type<s> program
@@ -140,6 +141,14 @@ expr: ID {}
     | '(' expr ')'
     ;
 
+literal: INT {}
+       | BOOLEAN {}
+       ;
+
+BOOLEAN: TRUE {}
+       | FALSE {}
+       ; 
+
 /*
 bin_op: arith_op {}
       | rel_op {}
@@ -162,12 +171,5 @@ cond_op: AND {}
        | OR {}
        ;
 */
-literal: INT {}
-       | BOOLEAN {}
-       ;
-
-BOOLEAN: TRUE {}
-       | FALSE {}
-       ; 
 
 %%

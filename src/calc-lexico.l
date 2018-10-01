@@ -14,6 +14,8 @@
 
 #include "calc-sintaxis.tab.h"
 
+void yyerror(char *msg);
+
 %}
 
 %option noyywrap
@@ -133,17 +135,23 @@ rel_op [<>]
                                 //printf("EQUALS: %s\n",yytext);
                                 return EQUALS;}
 
-"//".*\n                      {printf("Comentario: %s\n",yytext);}
+"//".*\n                      {//printf("Comentario: %s\n",yytext);
+                              }
 
-"/*"(.|\n)*"*/"               {printf("Comentario: %s\n",yytext);}
+"{"(.|\n)*"}"                 {//printf("Comentario: %s\n",yytext);
+                              }
 
-.|\n                          ; /* ignore all the rest */
+[ \t\n]+|\n                   ;//Ignore whitespace and lineskip
+
+.                             yyerror("Invalid character");
+
+
 
 %%
 
 
-void yyerror(){
-	printf("%s%d\n","-> ERROR Sintactico en la linea: ",yylineno);
+void yyerror(char *msg){
+	printf("%s. \nLine: %d\n",msg,yylineno);
 }
 
 int main(int argc,char *argv[]){

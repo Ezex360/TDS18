@@ -1,0 +1,18 @@
+//operadores aritmeticos
+program
+begin
+	void main() begin
+		integer x,y,res;
+		x = 10;
+		y = 20;
+		res = x + y;
+		res = y - x;
+		res = x * y;
+		res = y / x;
+		res = y % x;
+		res = -x;
+		res = (y - x) + x;
+
+	end
+ 
+end

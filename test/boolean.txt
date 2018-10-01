@@ -1,0 +1,12 @@
+//Test de booleanos
+program
+begin
+
+	void main() begin
+		bool x,y,z;
+		x = true;
+		y = false;
+		y = x && y;
+		z = x || y; 
+	end
+end
