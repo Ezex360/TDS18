@@ -1,6 +1,8 @@
 #! /bin/sh
 #Constants
 SCRIPTNAME="TDS18 Manager"
+BUILD="./src"
+OUTPUT="./bin"
 
 #Before Script
 
@@ -10,37 +12,37 @@ SCRIPTNAME="TDS18 Manager"
 case "$1" in
   compile)
 	echo "Compiling"
-	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
-	bison -d -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y
-	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	flex -o $OUTPUT/lex.yy.c $BUILD/calc-lexico.l 
+	bison -d -o $OUTPUT/calc-sintaxis.tab.c $BUILD/calc-sintaxis.y
+	gcc -I $BUILD $BUILD/*.c $OUTPUT/lex.yy.c $OUTPUT/calc-sintaxis.tab.c -o $OUTPUT/main
 	;;
   compile_flags)
 	echo "Compiling"
-	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
-	bison -v -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y 
-	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	flex -o $OUTPUT/lex.yy.c $BUILD/calc-lexico.l 
+	bison -v -o $OUTPUT/calc-sintaxis.tab.c $BUILD/calc-sintaxis.y 
+	gcc -I $BUILD $BUILD/*.c $OUTPUT/lex.yy.c $OUTPUT/calc-sintaxis.tab.c -o $BUILD/main
 	;;
   run)
-	./bin/main $2
+	$OUTPUT/main $2
 	;;
   test)
 	echo "Testing"
 	for filename in ./test/*.txt; do
 		echo "------  Test  $filename ------"
-		./bin/main $filename
+		$OUTPUT/main $filename
 		echo "------ END TEST ------\n"
 	done
 	;;
   quickrun)
 	echo "Compiling"
-	flex -o ./bin/lex.yy.c ./src/calc-lexico.l 
-	bison -d -o ./bin/calc-sintaxis.tab.c ./src/calc-sintaxis.y
-	gcc ./bin/lex.yy.c ./bin/calc-sintaxis.tab.c -o ./bin/main
+	flex -o $OUTPUT/lex.yy.c $BUILD/calc-lexico.l 
+	bison -d -o $OUTPUT/calc-sintaxis.tab.c $BUILD/calc-sintaxis.y
+	gcc -I $BUILD $BUILD/*.c $OUTPUT/lex.yy.c $OUTPUT/calc-sintaxis.tab.c -o $OUTPUT/main
 	echo "Running"
-	./bin/main $2
+	$OUTPUT/main $2
 	;;
   clean)
-	rm bin/*
+	rm $OUTPUT
 	;;
   *)
 	echo "Usage: $SCRIPTNAME {compile|run|test|quickrun|clean}" >&2

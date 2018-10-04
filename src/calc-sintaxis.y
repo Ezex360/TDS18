@@ -3,10 +3,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "definitions.h"
+
+  
+
+int yylex();
+int yyerror();
+
+extern node * root;
+extern stack * pila;
 
 %}
  
-%union { int i; char *s; }
+%union { int i; char *s; struct nary_tree * p; }
  
 %token<s> PROGRAM
 %token<s> BEGINN
@@ -31,7 +40,8 @@
 %token<s> ERR_CHAR
 
 
-//%type<s> program
+%type<p> program
+%type<p> list_method_decl
 //%type<s> var_aux
 //%type<s> list_ID
 //%type<s> var_decl
@@ -49,8 +59,8 @@
 //%type<s> arith_op
 //%type<s> rel_op
 //%type<s> cond_op
-%type<s> literal
-%type<s> BOOLEAN
+%type<p> literal
+%type<p> BOOLEAN
 
 %nonassoc '='
 %left AND OR
@@ -61,10 +71,17 @@
  
 %%
 
-program: PROGRAM BEGINN END {}
-       | PROGRAM BEGINN var_decl END {}
-       | PROGRAM BEGINN list_method_decl END {}
-       | PROGRAM BEGINN var_decl list_method_decl END {}
+program: PROGRAM BEGINN END {root = new_node("program"); YYACCEPT;}
+       | PROGRAM BEGINN var_decl END {root = new_node("program");YYACCEPT;}
+       | PROGRAM BEGINN list_method_decl END {root = new_node("program");
+                                              add_child(root,$3);
+                                              YYACCEPT;
+                                              }
+       | PROGRAM BEGINN var_decl list_method_decl END {
+                            root = new_node("program");
+                            add_child(root,$4);
+                            YYACCEPT;
+                            }
        ;
 
 type: INTEGER {}

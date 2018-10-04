@@ -11,10 +11,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "definitions.h"
+
 
 #include "calc-sintaxis.tab.h"
 
 void yyerror(char *msg);
+
+extern node * root;
+
 
 %}
 
@@ -162,5 +167,7 @@ int main(int argc,char *argv[]){
 		yyin = stdin;
 
 	yyparse();
-
+    printf("%s\n","Termine de parsear wacho, Comienzo a evaluar" );
+    print_dfs(root);
+    printf("\n%s\n","Termine de evaluar wacho" );
 }
